@@ -14,42 +14,25 @@ const fermiParadoxRive = new rive.Rive({
   
       const inputs = fermiParadoxRive.stateMachineInputs("State Machine 1");
   
-      // console.log(triggerFloatDown)
-      // btnFloatDown.onclick = (e) => {
-      //   e.preventDefault();
-  
-      //   triggerFloatDown.fire();
-      // };
-
-      var observer = new IntersectionObserver(function(entries) {
-        if(entries[0].isIntersecting === true){
-          console.log('Element is fully visible in screen');
-          const galaxiesZoomOut = inputs.find((i) => i.name === "galaxies-zoom-out");
-          const galaxiesZoomIn = inputs.find((i) => i.name === "galaxies-zoom-in");
-      
-          const text = animContainer.querySelectorAll("p");
-
-          text[0].classList.add("visible-fade");
-
-          setTimeout(() => {
-            text[1].classList.add("visible-fade");
-            galaxiesZoomOut.fire()
-          }, 2000);
-
-          setTimeout(() => {
-            text[2].classList.add("visible-fade");
-            galaxiesZoomIn.fire()
-          }, 4000);
-        }
-      }, { threshold: [1] });
-      
-      observer.observe(document.querySelector(".animContainer"));
     },
 });
 
 
-// const observer = new IntersectionObserver((entries) => {
-//   if(entries[0].isIntersecting === true)
-//     console.log('Element is fully visible in screen');
-// }, { threshold: [1] });
+const btnOverviewOpen = document.querySelector(".overviewOpen");
+const btnOverviewClose = document.querySelector(".overviewClose");
 
+console.log(btnOverviewOpen)
+
+btnOverviewOpen.addEventListener("click", overviewNav)
+btnOverviewClose.addEventListener("click", overviewNav)
+
+function overviewNav() {
+  console.log("aaa")
+  const overviewNav = document.querySelector(".overview > nav");
+
+  if(this.classList.contains("overviewOpen")) {
+    overviewNav.classList.add("overviewNavOpen")
+  }else {
+    overviewNav.classList.remove("overviewNavOpen")
+  }
+}
