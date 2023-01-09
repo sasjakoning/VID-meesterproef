@@ -10,7 +10,14 @@ html, * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+
+	scroll-behavior: smooth;
+	scroll-padding-top: 4rem;
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                Generic code                                */
+/* -------------------------------------------------------------------------- */
 
 body {
 	background-color: var(--background);
@@ -51,6 +58,18 @@ p, li {
 	line-height: 160%;
 }
 
+main {
+	max-width: 75rem;
+	margin: auto;
+	height: 100vh;
+	/* overflow: hidden; */
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                   Header nav                               */
+/* -------------------------------------------------------------------------- */
+
 header {
 	background-color: var(--background);
 	width: 100%;
@@ -80,10 +99,9 @@ header > nav > h1 {
 	height: 1rem;
 }
 
-main {
-	max-width: 75rem;
-	margin: auto;
-}
+/* -------------------------------------------------------------------------- */
+/*                                  Aside nav                                 */
+/* -------------------------------------------------------------------------- */
 
 .overview {
 	height: 100vh;
@@ -188,6 +206,11 @@ main {
 	padding-left: 1rem;
 }
 
+
+/* -------------------------------------------------------------------------- */
+/*                                main content                                */
+/* -------------------------------------------------------------------------- */
+
 .animContainer {
 	overflow: hidden;
 	object-fit: fill;
@@ -196,14 +219,16 @@ main {
 
 .animContainer > canvas {
 	width: 100%;
-	position: absolute;
 	z-index: -1;
 }
 
 
 main > article {
 	width: 100%;
-	min-height: 100vh;
+	height: calc(100vh - 4rem);
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
 	padding: 5rem 0;
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
@@ -212,8 +237,20 @@ main > article {
 	border: 1px solid red;
 }
 
+main > article::-webkit-scrollbar {
+	display: none;
+}
+
+main > article:first-of-type {
+	margin-top: 4rem;
+}
+
 main > article > .text > p:not(:last-of-type) {
 	margin-bottom: 2rem;
+}
+
+.text {
+	height: min-content;
 }
 
 ._1 > .text {
@@ -231,7 +268,7 @@ main > article > .text > p:not(:last-of-type) {
 ._2-3-4 > .animContainer {
 	grid-column: 7 / span 6;
 	position: sticky;
-	height: 100vh;
+	height: min-content;
 	top: 0;
 	z-index: -1;
 }
@@ -243,11 +280,21 @@ main > article > .text > p:not(:last-of-type) {
 	gap: 1.5rem;
 }
 
-._5 > .text > p:first-of-type {
+._5 > .text > p:nth-of-type(1) {
 	grid-column: 1 / span 6;
 }
 
-._5 > .text > p:last-of-type {
+._5 > .text > p:nth-of-type(2) {
 	grid-column: 7 / span 6;
+}
+
+._5 > .animContainer {
+	grid-column: 1 / span 12;
+	aspect-ratio: 16/9;
+}
+
+._5 > .animContainer > canvas {
+	width: auto;
+	height: 100%;
 }
 

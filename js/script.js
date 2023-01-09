@@ -1,18 +1,35 @@
-const btnOverviewOpen = document.querySelector(".overviewOpen");
-const btnOverviewClose = document.querySelector(".overviewClose");
+// const btnOverviewOpen = document.querySelector(".overviewOpen");
+// const btnOverviewClose = document.querySelector(".overviewClose");
 
-btnOverviewOpen.addEventListener("click", overviewNav)
-btnOverviewClose.addEventListener("click", overviewNav)
+// btnOverviewOpen.addEventListener("click", overviewNav)
+// btnOverviewClose.addEventListener("click", overviewNav)
 
-function overviewNav() {
-  const overviewNav = document.querySelector(".overview > nav");
+// function overviewNav() {
+//   const overviewNav = document.querySelector(".overview > nav");
 
-  if(this.classList.contains("overviewOpen")) {
-    overviewNav.classList.add("overviewNavOpen")
-  }else {
-    overviewNav.classList.remove("overviewNavOpen")
+//   if(this.classList.contains("overviewOpen")) {
+//     overviewNav.classList.add("overviewNavOpen")
+//   }else {
+//     overviewNav.classList.remove("overviewNavOpen")
+//   }
+// }
+
+
+const observer = new IntersectionObserver(function(entries) {
+  if(entries[0].isIntersecting === true){
+    console.log("element is fully visible in screen")
+    console.log(entries[0].target.classList.contains("_1"))
   }
-}
+}, { threshold: 0.5})
+
+const articles = document.querySelectorAll("main > article")
+
+
+articles.forEach((article) => {
+  observer.observe(article)
+})
+
+// observer.observe(document.querySelector("article:nth-of-type(2)"))
 
 
 // animations
@@ -29,10 +46,7 @@ const canvas2And3And4Rive = new rive.Rive({
     onLoad: (_) => {
       canvas2And3And4Rive.resizeDrawingSurfaceToCanvas();
 
-      console.log(canvas2And3And4Rive)
-  
       const inputs = canvas2And3And4Rive.stateMachineInputs("State Machine 1");
-  
     },
 });
 
@@ -48,8 +62,6 @@ const canvas5Rive = new rive.Rive({
     onLoad: (_) => {
       canvas5Rive.resizeDrawingSurfaceToCanvas();
 
-      console.log(canvas5Rive)
-  
       const inputs = canvas5Rive.stateMachineInputs("canvas-5-states");
     },
 });
