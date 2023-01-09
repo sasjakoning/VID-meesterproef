@@ -85,21 +85,6 @@ main {
 	margin: auto;
 }
 
-main > article {
-	width: 100%;
-	display: grid;
-	grid-template-columns: repeat(12, 1fr);
-	gap: 1.5rem;
-}
-
-main > article:nth-of-type(1) > .textContainer {
-	grid-column: 1 / span 5;
-}
-
-main > article:nth-of-type(2) > .textContainer {
-	grid-column: 8 / span 5;
-}
-
 .overview {
 	height: 100vh;
 	display: flex;
@@ -207,13 +192,62 @@ main > article:nth-of-type(2) > .textContainer {
 	overflow: hidden;
 	object-fit: fill;
 	position: relative;
-
-	grid-column: 7 / span 6;
 }
 
 .animContainer > canvas {
 	width: 100%;
 	position: absolute;
 	z-index: -1;
+}
+
+
+main > article {
+	width: 100%;
+	min-height: 100vh;
+	padding: 5rem 0;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+
+	border: 1px solid red;
+}
+
+main > article > .text > p:not(:last-of-type) {
+	margin-bottom: 2rem;
+}
+
+._1 > .text {
+	grid-column: 1 / span 12;
+}
+
+._2-3-4 > .text {
+	grid-column: 1 / span 5;
+}
+
+._2-3-4 > .text > p:first-of-type {
+	margin-bottom: 12.5rem;
+}
+
+._2-3-4 > .animContainer {
+	grid-column: 7 / span 6;
+	position: sticky;
+	height: 100vh;
+	top: 0;
+	z-index: -1;
+}
+
+._5 > .text {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._5 > .text > p:first-of-type {
+	grid-column: 1 / span 6;
+}
+
+._5 > .text > p:last-of-type {
+	grid-column: 7 / span 6;
 }
 
