@@ -14,54 +14,122 @@
 //   }
 // }
 
+/* -------------------------------------------------------------------------- */
+/*                          Prev and next navigation                          */
+/* -------------------------------------------------------------------------- */
 
-const observer = new IntersectionObserver(function(entries) {
-  if(entries[0].isIntersecting === true){
-    console.log("element is fully visible in screen")
-    console.log(entries[0].target.classList.contains("_1"))
-  }
-}, { threshold: 0.5})
+const articles = document.querySelectorAll("main > article");
+const articleIds = document.querySelectorAll(`[id^='anchor-']`);
 
-const articles = document.querySelectorAll("main > article")
+let anchorList = [];
+let currentAnchor = getAnchor();
 
+// check where user is on page on load
+// credit: https://programming.bogdanbucur.eu/how-to-get-the-url-anchor-with-javascript/
+function getAnchor() {
+  const currentUrl = document.URL,
+  urlParts = currentUrl.split('#');
+  
+  return (urlParts.length > 1) ? urlParts[1] : null;
+}
+
+
+findIds(articleIds, anchorList)
+
+// find all anchorpoints and push to anchorList
+function findIds(query, list) {
+  query.forEach((item) => {
+    list.push(item.id);
+  })
+}
+
+// change currentAnchor when in viewport
+const observer = new IntersectionObserver(function (entries) {
+  if (entries[0].isIntersecting === true) {
+    currentAnchor = entries[0].target.id;
+  };
+}, { threshold: 0.5 });
 
 articles.forEach((article) => {
-  observer.observe(article)
-})
-
-// observer.observe(document.querySelector("article:nth-of-type(2)"))
+  observer.observe(article);
+});
 
 
-// animations
+const navPrevious = document.querySelector(".nav-previous");
+const navNext = document.querySelector(".nav-next");
+
+navNext.addEventListener("click", anchorNav);
+navPrevious.addEventListener("click", anchorNav);
+
+function anchorNav() {
+  let nextPrevAnchor = ""
+  
+  if(this.classList.contains("nav-next")){
+    nextPrevAnchor = (anchorList.indexOf(currentAnchor)) + 1;
+  }else {
+    nextPrevAnchor = (anchorList.indexOf(currentAnchor)) - 1;
+  }
+  
+  currentAnchor = anchorList[nextPrevAnchor];
+  this.href = "#" + currentAnchor;
+};
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 animations                                 */
+/* -------------------------------------------------------------------------- */
 
 const canvas2And3And4 = document.querySelector("#_2-3-4-canvas");
 
 const canvas2And3And4Rive = new rive.Rive({
-    src: "./images/the-fermi-paradox.riv",
-    canvas: canvas2And3And4,
-    autoplay: true,
-    stateMachines: "State Machine 1",
-    artboard: "visual",
-    fit: rive.Fit.cover,
-    onLoad: (_) => {
-      canvas2And3And4Rive.resizeDrawingSurfaceToCanvas();
+  src: "./images/the-fermi-paradox.riv",
+  canvas: canvas2And3And4,
+  autoplay: true,
+  stateMachines: "State Machine 1",
+  artboard: "visual",
+  fit: rive.Fit.cover,
+  onLoad: (_) => {
+    canvas2And3And4Rive.resizeDrawingSurfaceToCanvas();
 
-      const inputs = canvas2And3And4Rive.stateMachineInputs("State Machine 1");
-    },
+    const inputs = canvas2And3And4Rive.stateMachineInputs("State Machine 1");
+  },
 });
 
 const canvas5 = document.querySelector("#_5-canvas");
 
-const canvas5Rive = new rive.Rive({
-    src: "./images/the-fermi-paradox.riv",
-    canvas: canvas5,
-    autoplay: true,
-    stateMachines: "canvas-5-states",
-    artboard: "canvas-5",
-    fit: rive.Fit.cover,
-    onLoad: (_) => {
-      canvas5Rive.resizeDrawingSurfaceToCanvas();
+const prevNextBtns = document.querySelectorAll("footer > a");
 
-      const inputs = canvas5Rive.stateMachineInputs("canvas-5-states");
-    },
+const canvas5Rive = new rive.Rive({
+  src: "./images/the-fermi-paradox.riv",
+  canvas: canvas5,
+  autoplay: true,
+  stateMachines: "canvas-5-states",
+  artboard: "canvas-5",
+  fit: rive.Fit.cover,
+  onLoad: (_) => {
+    canvas5Rive.resizeDrawingSurfaceToCanvas();
+
+    const inputs = canvas5Rive.stateMachineInputs("canvas-5-states");
+    const trigger5Dot3Entry = inputs.find((i) => i.name === "5.3");
+
+    console.log(trigger5Dot3Entry)
+
+    prevNextBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        
+        switch(currentAnchor) {
+          case "anchor-timespan":
+            trigger5Dot3Entry.value = false;
+            break;
+          case "anchor-timespan-1":
+            trigger5Dot3Entry.value = true;
+            break;
+        }
+
+        // if(currentAnchor == "anchor-timespan-1"){
+        //   trigger5Dot3Entry.fire();
+        // }
+      })
+    })
+  },
 });
