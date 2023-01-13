@@ -46,7 +46,7 @@ function findIds(query, list) {
 // change currentAnchor when in viewport
 const observer = new IntersectionObserver(function (entries) {
   if (entries[0].isIntersecting === true) {
-    currentAnchor = entries[0].target.id;
+    // currentAnchor = entries[0].target.id;
   };
 }, { threshold: 0.5 });
 
@@ -71,7 +71,17 @@ function anchorNav() {
   }
   
   currentAnchor = anchorList[nextPrevAnchor];
+
   this.href = "#" + currentAnchor;
+
+  const currentElement = document.querySelector("#" + currentAnchor);
+  const previousElement = document.querySelector(".text-active");
+
+  if (previousElement) {
+    previousElement.classList.remove("text-active");
+  }
+  
+  currentElement.classList.add("text-active");
 };
 
 
