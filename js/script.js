@@ -143,3 +143,45 @@ const canvas5Rive = new rive.Rive({
     })
   },
 });
+
+const canvas6dot1 = document.getElementById("_6.1-canvas");
+
+const canvas6Dot1Rive = new rive.Rive({
+  src: "./images/the-fermi-paradox.riv",
+  canvas: canvas6dot1,
+  autoplay: true,
+  stateMachines: "earth-states",
+  artboard: "6.1",
+  fit: rive.Fit.cover,
+  onLoad: (_) => {
+    canvas6Dot1Rive.resizeDrawingSurfaceToCanvas();
+  },
+});
+
+const canvas6dot2 = document.getElementById("_6.2-canvas");
+
+const canvas6Dot2Rive = new rive.Rive({
+  src: "./images/the-fermi-paradox.riv",
+  canvas: canvas6dot2,
+  autoplay: true,
+  stateMachines: "dyson-sphere-states",
+  artboard: "6.2",
+  fit: rive.Fit.cover,
+  onLoad: (_) => {
+    canvas6Dot2Rive.resizeDrawingSurfaceToCanvas();
+  },
+});
+
+const canvas6dot3 = document.getElementById("_6.3-canvas");
+
+const canvas6Dot3Rive = new rive.Rive({
+  src: "./images/the-fermi-paradox.riv",
+  canvas: canvas6dot3,
+  autoplay: true,
+  stateMachines: "galaxy-states",
+  artboard: "6.3",
+  fit: rive.Fit.cover,
+  onLoad: (_) => {
+    canvas6Dot3Rive.resizeDrawingSurfaceToCanvas();
+  },
+});
