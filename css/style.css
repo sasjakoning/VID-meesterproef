@@ -12,7 +12,7 @@ html, * {
 	box-sizing: border-box;
 
 	scroll-behavior: smooth;
-	scroll-padding-top: 4rem;
+	/* scroll-padding-top: 4rem; */
 
 	/* border: 1px solid yellow; */
 }
@@ -63,42 +63,7 @@ main {
 	max-width: 75rem;
 	margin: auto;
 	height: 100vh;
-	/* overflow: hidden; */
-}
-
-
-/* -------------------------------------------------------------------------- */
-/*                                   Header nav                               */
-/* -------------------------------------------------------------------------- */
-
-header {
-	background-color: var(--background);
-	width: 100%;
-	height: 4rem;
-	position: fixed;
-	top: 0;
-	z-index: 1000;
-}
-
-header > nav {
-	width: 100%;
-	max-width: 75rem;
-	height: 100%;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	border-bottom: 1px solid var(--primary);
-}
-
-header > nav > h1 {
-	font-size: 1.5rem;
-}
-
-.hamburgerBtn {
-	width: 1rem;
-	height: 1rem;
+	overflow: hidden;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -113,6 +78,8 @@ header > nav > h1 {
 	left: 0;
 	align-items: center;
 	overflow-y: hidden;
+
+	z-index: 100;
 }
 
 .overview > div {
@@ -126,7 +93,21 @@ header > nav > h1 {
 	top: 50vh;
 }
 
-.overviewPrev, .overviewNext {
+.overview > a {
+	position: absolute;
+	text-decoration: none;
+	color: var(--primary);
+	bottom: 4rem;
+	left: .7rem;
+
+	background-image: url(../images/home.svg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 2rem;
+	aspect-ratio: 1/1;
+}
+
+.nav-previous, .nav-next {
 	width: 1rem;
 	height: 1rem;
 	background: url(../images/arrow.svg) no-repeat;
@@ -134,11 +115,11 @@ header > nav > h1 {
 	border: none;
 }
 
-.overviewPrev {
+.nav-next {
 	rotate: -90deg;
 }
 
-.overviewNext {
+.nav-previous {
 	rotate: 90deg;
 }
 
@@ -150,7 +131,7 @@ header > nav > h1 {
 	color: var(--primary);
 }
 
-.overviewOpen >  span {
+.overviewOpen > span {
 	display: block;
 	transform: scale(1);
 	width: 100%;
@@ -160,7 +141,7 @@ header > nav > h1 {
 }
 
 .overviewOpen:hover > span {
-	transform: scale(1.1);
+	transform: scale(1.4);
 	transition: 100ms;
 }
 
@@ -172,7 +153,7 @@ header > nav > h1 {
 	background-color: transparent;
 	border: none;
 	position: absolute;
-	right: 0;
+	right: .5rem;
 	top: 50vh;
 	transform: translateY(-50%);
 }
@@ -183,6 +164,7 @@ header > nav > h1 {
 	background: var(--background);
 	transform: translateX(-110%);
 	transition: 200ms;
+	border-right: 1px solid var(--primary);
 }
 
 .overviewNavOpen {
@@ -191,9 +173,16 @@ header > nav > h1 {
 
 .overview > nav > ul {
 	padding: 2rem 0 0 4rem;
-	height: 100%;
 	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	overflow-y: scroll;
+}
+
+.overview > nav > ul::-webkit-scrollbar {
+	display: none;
 }
 
 .overview ul {
@@ -280,7 +269,8 @@ footer > a {
 
 main > article {
 	width: 100%;
-	height: calc(100vh - 4rem);
+	/* height: calc(100vh - 4rem); */
+	height: 100vh;
 	overflow-y: scroll;
 	-ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
@@ -288,17 +278,18 @@ main > article {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	gap: 1.5rem;
+	position: relative;
 
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 main > article::-webkit-scrollbar {
 	display: none;
 }
 
-main > article:first-of-type {
+/* main > article:first-of-type {
 	margin-top: 4rem;
-}
+} */
 
 main > article > .text > p:not(:last-of-type) {
 	margin-bottom: 2rem;
@@ -385,6 +376,15 @@ main > article > .text > p:not(:last-of-type) {
 }
 
 /* ------------------------------- 2, 3 and 4 ------------------------------- */
+
+._2-3-4::after {
+	content: '';
+	position: fixed;
+	width: 100%;
+	height: 10%;
+	bottom: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
 
 ._2-3-4 > .text {
 	grid-column: 1 / span 5;
@@ -798,6 +798,7 @@ main > article > .text > p:not(:last-of-type) {
 	gap: 1.5rem;
 	align-items: flex-start;
 	position: relative;
+	scroll-margin-top: 2rem;
 }
 
 ._15-sub > figure:nth-of-type(odd) > .text {
