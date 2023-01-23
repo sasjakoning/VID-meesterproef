@@ -67,6 +67,7 @@ const navPrevious = document.querySelector(".nav-previous");
 const navNext = document.querySelector(".nav-next");
 
 const navHome = document.querySelector(".nav-home");
+const navName = document.querySelector(".overviewOpen > p");
 
 navNext.addEventListener("click", anchorNav);
 navPrevious.addEventListener("click", anchorNav);
@@ -75,19 +76,38 @@ navHome.addEventListener("click", () => {
   currentAnchor = "";
 });
 
+// get anchorlinks in navigation
+const navLinks = document.querySelectorAll(".overview nav a");
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    
+    urlParts = link.href.split('#');
+    
+    currentAnchor = urlParts[1];
+  })
+})
+
+// navigate to next or previous anchorpoint
 function anchorNav(e) {
   if(currentAnchor){  
     let nextPrevAnchor = ""
     
+    // check if next or previous button is clicked
     if(this.classList.contains("nav-next")){
       nextPrevAnchor = (anchorList.indexOf(currentAnchor)) + 1;
     }else {
       nextPrevAnchor = (anchorList.indexOf(currentAnchor)) - 1;
     }
     
+
     currentAnchor = anchorList[nextPrevAnchor];
   
     this.href = "#" + currentAnchor;
+
+    const anchorName = currentAnchor.replace("anchor-", "");
+
+    navName.replaceChildren(anchorName)
     
     animateElement();
   }
