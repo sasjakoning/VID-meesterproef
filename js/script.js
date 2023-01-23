@@ -127,10 +127,11 @@ function animateElement() {
       currentElement.classList.remove("anim-invis");
     }
   
-    if(currentElementParent.id == "anchor-thekardashevscale"){
+    if(currentElementParent.id == "anchor-thekardashevscale" || currentElementParent.id == "anchor-wererare-2" || currentElementParent.id == "anchor-werefucked-2" || currentElementParent.id == "anchor-mediocrityprinciple-2"){
       const topPos = currentElement.offsetTop;
       currentElementParent.scrollTop = (topPos) - 300;
     }
+
     
   }
 
@@ -163,10 +164,10 @@ const canvas3Rive = new rive.Rive({
     const trigger3dot8 = inputs.find((i) => i.name === "3.8");
     const trigger3dot9 = inputs.find((i) => i.name === "3.9");
 
-    navNext.addEventListener("click", canvas3Anim);
-    navPrevious.addEventListener("click", canvas3Anim);
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
     
-    function canvas3Anim(e) {
+    function canvasAnim(e) {
       let anim = "anim"
       if(currentAnchor.includes(anim)) {
         e.preventDefault();
@@ -229,10 +230,10 @@ const canvas5Rive = new rive.Rive({
     const inputs = canvas5Rive.stateMachineInputs("5-states");
     const trigger5Dot3 = inputs.find((i) => i.name === "5.3");
 
-    navNext.addEventListener("click", canvas5Anim);
-    navPrevious.addEventListener("click", canvas5Anim);
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
     
-    function canvas5Anim(e) {
+    function canvasAnim(e) {
       let anim = "anim"
       if(currentAnchor.includes(anim)) {
         e.preventDefault();
@@ -517,6 +518,25 @@ const canvas12Dot3Rive = new rive.Rive({
   onLoad: (_) => {
     canvas12Dot3Rive.resizeDrawingSurfaceToCanvas();
 
+    const inputs = canvas12Dot3Rive.stateMachineInputs("12.3-states");
+    const trigger12Dot4 = inputs.find((i) => i.name === "12.4");
+
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
+    
+    function canvasAnim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-12-4":
+            trigger12Dot4.value = true;
+            break;
+        }
+      }
+    }
+
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
         canvas12Dot3Rive.play();
@@ -541,6 +561,29 @@ const canvas12Dot7Rive = new rive.Rive({
   alignment: rive.Alignment.TopCenter,
   onLoad: (_) => {
     canvas12Dot7Rive.resizeDrawingSurfaceToCanvas();
+    
+    const inputs = canvas12Dot7Rive.stateMachineInputs("12.7-states");
+    const trigger12Dot8 = inputs.find((i) => i.name === "12.8");
+    const trigger12Dot9 = inputs.find((i) => i.name === "12.9");
+
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
+    
+    function canvasAnim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-12-8":
+            trigger12Dot8.value = true;
+            break;
+          case "anchor-anim-12-9":
+            trigger12Dot9.value = true;
+            break;
+        }
+      }
+    }
 
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
@@ -593,6 +636,27 @@ const canvas13Dot2Rive = new rive.Rive({
   onLoad: (_) => {
     canvas13Dot2Rive.resizeDrawingSurfaceToCanvas();
 
+    const inputs = canvas13Dot2Rive.stateMachineInputs("13.2-states");
+    const trigger13Dot3 = inputs.find((i) => i.name === "13.3");
+
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
+    
+    function canvasAnim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-13-3":
+            setTimeout(() => {  
+              trigger13Dot3.value = true;
+            }, 1000);
+            break;
+        }
+      }
+    }
+
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
         canvas13Dot2Rive.play();
@@ -643,6 +707,27 @@ const canvas14Dot2Rive = new rive.Rive({
   onLoad: (_) => {
     canvas14Dot2Rive.resizeDrawingSurfaceToCanvas();
 
+    const inputs = canvas14Dot2Rive.stateMachineInputs("14.2-states");
+    const trigger14Dot3 = inputs.find((i) => i.name === "14.3");
+
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
+    
+    function canvasAnim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-14-3":
+            setTimeout(() => {  
+              trigger14Dot3.value = true;
+            }, 1000);
+            break;
+        }
+      }
+    }
+
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
         canvas14Dot2Rive.play();
@@ -667,6 +752,33 @@ const canvas14Dot4Rive = new rive.Rive({
   alignment: rive.Alignment.TopCenter,
   onLoad: (_) => {
     canvas14Dot4Rive.resizeDrawingSurfaceToCanvas();
+
+    const inputs = canvas14Dot4Rive.stateMachineInputs("14.4-states");
+    const trigger14Dot5 = inputs.find((i) => i.name === "14.5");
+    const trigger14Dot6 = inputs.find((i) => i.name === "14.6");
+
+    navNext.addEventListener("click", canvasAnim);
+    navPrevious.addEventListener("click", canvasAnim);
+    
+    function canvasAnim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-14-5":
+            setTimeout(() => {  
+              trigger14Dot5.value = true;
+            }, 1000);
+            break;
+          case "anchor-anim-14-6":
+            setTimeout(() => {  
+              trigger14Dot6.value = true;
+            }, 1000);
+            break;
+        }
+      }
+    }
 
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
