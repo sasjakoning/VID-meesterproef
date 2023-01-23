@@ -149,7 +149,7 @@ function animateElement() {
   
     if(currentElementParent.id == "anchor-thekardashevscale" || currentElementParent.id == "anchor-wererare-2" || currentElementParent.id == "anchor-werefucked-2" || currentElementParent.id == "anchor-mediocrityprinciple-2"){
       const topPos = currentElement.offsetTop;
-      currentElementParent.scrollTop = (topPos) - 300;
+      currentElementParent.scrollTop = (topPos) - 200;
     }
 
     

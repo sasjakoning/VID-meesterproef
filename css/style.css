@@ -529,6 +529,8 @@ main > article > .text > p:not(:last-of-type) {
 ._5 > .animContainer {
 	grid-column: 2 / span 10;
 	aspect-ratio: 16/9;
+	height: 90%;
+	margin: auto;
 }
 
 ._5 > .animContainer > canvas {
@@ -886,6 +888,9 @@ main > article > .text > p:not(:last-of-type) {
 ._13-2 > .animContainer {
 	grid-row: 1 / span 3;
 	grid-column: 2 / span 10;
+	height: 100%;
+	aspect-ratio: 1/1;
+	margin: auto;
 }
 
 ._13-2 > .text {
