@@ -56,7 +56,7 @@ h5 {
 }
 
 p, li {
-	line-height: 160%;
+	line-height: 1.9;
 }
 
 main {
@@ -207,25 +207,6 @@ main {
 /*                                   footer                                   */
 /* -------------------------------------------------------------------------- */
 
-footer {
-	position: fixed;
-	bottom: 0;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 4rem;
-
-	width: 100vw;
-	background: var(--background);
-	border-top: 1px solid var(--primary);
-	height: 3rem;
-}
-
-footer > a {
-	text-decoration: none;
-	color: var(--primary);
-}
 
 /* -------------------------------------------------------------------------- */
 /*                                main content                                */
@@ -520,7 +501,7 @@ main > article > .text > p:not(:last-of-type) {
 }
 
 ._5 > .animContainer {
-	grid-column: 1 / span 12;
+	grid-column: 2 / span 10;
 	aspect-ratio: 16/9;
 }
 
@@ -560,9 +541,30 @@ main > article > .text > p:not(:last-of-type) {
 	grid-row: 5;
 }
 
+._6 > div:last-of-type {
+	margin-bottom: 10rem;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: 2;
+	align-items: center;
+}
+
+._6 > div:last-of-type > .text:first-of-type {
+	grid-column: 1 / span 10;
+	grid-row: 1;
+}
+
+._6 > div:last-of-type > .text:last-of-type {
+	grid-column: 1 / span 4;
+	grid-row: 2;
+}
+
+
 ._6 > div > .animContainer {
 	display: flex;
 	justify-content: center;
+	grid-column: 5 / span 6;
+	grid-row: 2;
 }
 
 ._6 canvas {
@@ -691,6 +693,7 @@ main > article > .text > p:not(:last-of-type) {
 
 ._9-2 > .animContainer {
 	grid-column: 2 / span 10;
+	height: auto;
 }
 
 ._9-2 > .animContainer > canvas {
@@ -788,16 +791,44 @@ main > article > .text > p:not(:last-of-type) {
 
 ._12 {
 	grid-template-rows: repeat(3, 1fr);
+	gap: 4rem;
 }
 
 ._12 > figure:nth-of-type(1) {
 	grid-column: 1 / span 12;
 	grid-row: 1 / span 1;
+
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+._12 > figure > .text > h3 {
+	margin-bottom: 1.5rem;
+}
+
+._12 > figure:nth-of-type(1) > .text {
+	grid-column: 1 / span 4;
+}
+
+._12 > figure:nth-of-type(1) > .animContainer {
+	grid-column: 5 / span 8;
 }
 
 ._12 > figure:nth-of-type(2) {
 	grid-column: 1 / span 12;
 	grid-row: 2 / span 1;
+
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+._12 > figure:nth-of-type(2) > .text {
+	grid-column: 9 / span 4;
+	grid-row: 1;
+}
+
+._12 > figure:nth-of-type(2) > .animContainer {
+	grid-column: 1 / span 8;
 }
 
 ._12 > div {
@@ -832,7 +863,7 @@ main > article > .text > p:not(:last-of-type) {
 }
 
 ._13-2 > .text {
-	grid-row: 3 / span 1;
+	grid-row: 1 / span 1;
 	grid-column: 6 / span 7;
 	display: flex;
 	flex-direction:15 column;
@@ -858,6 +889,7 @@ main > article > .text > p:not(:last-of-type) {
 }
 
 ._14-2 > div {
+	margin-top: 4rem;
 	grid-column: 2 / span 10;
 }
 
@@ -865,6 +897,17 @@ main > article > .text > p:not(:last-of-type) {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+._14-2 > div > .animContainer {
+	width: 60%;
+	margin: auto;
+}
+
+/* ---------------------------------- 14.3 ---------------------------------- */
+
+._14-3 {
+	background: url(../images/bg-stars.svg);
 }
 
 /* --------------------------------- 15-sub --------------------------------- */
@@ -896,7 +939,7 @@ main > article > .text > p:not(:last-of-type) {
 	grid-template-columns: repeat(12, 1fr);
 	grid-template-rows: 1, 1fr;
 	gap: 1.5rem;
-	align-items: flex-start;
+	align-items:center;
 	position: relative;
 	scroll-margin-top: 2rem;
 }
