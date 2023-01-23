@@ -1,3 +1,8 @@
+
+/* -------------------------------------------------------------------------- */
+/*                           side panel overview nav                          */
+/* -------------------------------------------------------------------------- */
+
 const btnOverviewOpen = document.querySelector(".overviewOpen");
 const btnOverviewClose = document.querySelector(".overviewClose");
 
@@ -27,7 +32,10 @@ let currentAnchor = getAnchor();
 // on load, scroll to current anchor
 window.addEventListener("load", () => {
   const scrollToElement = document.querySelector("#" + currentAnchor);
-  scrollToElement.scrollIntoView({ behavior: "smooth" });
+
+  if(scrollToElement){
+    scrollToElement.scrollIntoView({ behavior: "smooth" });
+  }
 })
 
 
@@ -37,7 +45,7 @@ function getAnchor() {
   const currentUrl = document.URL,
   urlParts = currentUrl.split('#');
   
-  return (urlParts.length > 1) ? urlParts[1] : null;
+  return (urlParts.length > 1) ? urlParts[1] : "anchor-start";
 }
 
 
@@ -55,20 +63,9 @@ function findIds(query, list) {
   anchorList.splice(index, 1);
 }
 
-
-// const observer = new IntersectionObserver(function (entries) {
-//   if (entries[0].isIntersecting === true) {
-//     currentAnchor = entries[0].target.id;
-//   };
-// }, { threshold: 0.5 });
-
-// articles.forEach((article) => {
-//   observer.observe(article);
-// });
-
-
 const navPrevious = document.querySelector(".nav-previous");
 const navNext = document.querySelector(".nav-next");
+
 const navHome = document.querySelector(".nav-home");
 
 navNext.addEventListener("click", anchorNav);
@@ -78,68 +75,140 @@ navHome.addEventListener("click", () => {
   currentAnchor = "";
 });
 
-function anchorNav() {
-  let nextPrevAnchor = ""
+function anchorNav(e) {
+  if(currentAnchor){  
+    let nextPrevAnchor = ""
+    
+    if(this.classList.contains("nav-next")){
+      nextPrevAnchor = (anchorList.indexOf(currentAnchor)) + 1;
+    }else {
+      nextPrevAnchor = (anchorList.indexOf(currentAnchor)) - 1;
+    }
+    
+    currentAnchor = anchorList[nextPrevAnchor];
   
-  if(this.classList.contains("nav-next")){
-    nextPrevAnchor = (anchorList.indexOf(currentAnchor)) + 1;
-  }else {
-    nextPrevAnchor = (anchorList.indexOf(currentAnchor)) - 1;
+    this.href = "#" + currentAnchor;
+    
+    animateElement();
   }
-  
-  currentAnchor = anchorList[nextPrevAnchor];
 
-  this.href = "#" + currentAnchor;
-
-  // const currentElement = document.querySelector("#" + currentAnchor);
-  // const previousElement = document.querySelector(".text-active");
-
-  // if (previousElement) {
-  //   previousElement.classList.remove("text-active");
-  // }
-  
-  // currentElement.classList.add("text-active");
 };
+
+
+// add animations to texts when their active
+
+function animateElement() {
+  const currentElement = document.querySelector("#" + currentAnchor);
+
+  let anim = "anim";
+
+  if(currentElement.id.includes(anim)) {
+
+    const currentElementParent = currentElement.closest("article");
+  
+    if(currentElementParent.id == "anchor-thenumbers") {
+      const previousElement = document.querySelector(".anim-scale-up");
+  
+      const topPos = currentElement.offsetTop;
+      currentElementParent.scrollTop = (topPos) - 300;
+    
+      if(previousElement) {
+        previousElement.classList.add("anim-scale-down");
+        previousElement.classList.remove("anim-scale-up");
+      }
+    
+      if(currentElement.classList.contains("anim-invis")) {
+        currentElement.classList.remove("anim-invis");
+      }
+    
+      currentElement.classList.add("anim-scale-up");
+    }else if(currentElement.classList.contains("anim-invis")) {
+      currentElement.classList.add("anim-visible");
+      currentElement.classList.remove("anim-invis");
+    }
+  
+    if(currentElementParent.id == "anchor-thekardashevscale"){
+      const topPos = currentElement.offsetTop;
+      currentElementParent.scrollTop = (topPos) - 300;
+    }
+    
+  }
+
+}
+
 
 /* -------------------------------------------------------------------------- */
 /*                                 animations                                 */
 /* -------------------------------------------------------------------------- */
 
-// const observer = new IntersectionObserver(function (entries) {
-//   if (entries[0].isIntersecting === true) {
-//     currentAnchor = entries[0].target.id;
-//   };
-// }, { threshold: 0.5 });
+const canvas3 = document.querySelector("#_3-canvas");
 
-// articles.forEach((article) => {
-//   observer.observe(article);
-// });
-
-
-
-const canvas2And3And4 = document.querySelector("#_2-3-4-canvas");
-
-const canvas2And3And4Rive = new rive.Rive({
+const canvas3Rive = new rive.Rive({
   src: "./images/the-fermi-paradox.riv",
-  canvas: canvas2And3And4,
+  canvas: canvas3,
   autoplay: true,
   stateMachines: "3-states",
   artboard: "3",
   fit: rive.Fit.cover,
   onLoad: (_) => {
-    canvas2And3And4Rive.resizeDrawingSurfaceToCanvas();
+    canvas3Rive.resizeDrawingSurfaceToCanvas();
 
-    const inputs = canvas2And3And4Rive.stateMachineInputs("3-states");
+    const inputs = canvas3Rive.stateMachineInputs("3-states");
+    const trigger3dot2 = inputs.find((i) => i.name === "3.2");
+    const trigger3dot3 = inputs.find((i) => i.name === "3.3");
+    const trigger3dot4 = inputs.find((i) => i.name === "3.4");
+    const trigger3dot5 = inputs.find((i) => i.name === "3.5");
+    const trigger3dot6 = inputs.find((i) => i.name === "3.6");
+    const trigger3dot7 = inputs.find((i) => i.name === "3.7");
+    const trigger3dot8 = inputs.find((i) => i.name === "3.8");
+    const trigger3dot9 = inputs.find((i) => i.name === "3.9");
+
+    navNext.addEventListener("click", canvas3Anim);
+    navPrevious.addEventListener("click", canvas3Anim);
     
+    function canvas3Anim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-3-2":
+            trigger3dot2.value = true;
+            break;
+          case "anchor-anim-3-3":
+            trigger3dot3.value = true;
+            break;
+          case "anchor-anim-3-4":
+            trigger3dot4.value = true;
+            break;
+          case "anchor-anim-3-5":
+            trigger3dot5.value = true;
+            setTimeout(() => {
+              trigger3dot6.value = true;
+            }, 1000);
+            break;
+          case "anchor-anim-3-7":
+            trigger3dot7.value = true;
+            break;
+          case "anchor-anim-3-8":
+            trigger3dot8.value = true;
+            break;
+          case "anchor-anim-3-9":
+            trigger3dot9.value = true;
+            break;
+        }
+      }
+    }
+
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
-        canvas2And3And4Rive.play();
+        canvas3Rive.play();
       }else {
-        canvas2And3And4Rive.pause();
+        canvas3Rive.pause();
       }
     }, { threshold: 0.5 });
 
-    observer.observe(canvas2And3And4);
+    observer.observe(canvas3);
   },
 });
 
@@ -158,6 +227,23 @@ const canvas5Rive = new rive.Rive({
     canvas5Rive.resizeDrawingSurfaceToCanvas();
 
     const inputs = canvas5Rive.stateMachineInputs("5-states");
+    const trigger5Dot3 = inputs.find((i) => i.name === "5.3");
+
+    navNext.addEventListener("click", canvas5Anim);
+    navPrevious.addEventListener("click", canvas5Anim);
+    
+    function canvas5Anim(e) {
+      let anim = "anim"
+      if(currentAnchor.includes(anim)) {
+        e.preventDefault();
+
+        switch(currentAnchor) {
+          case "anchor-anim-5-3":
+            trigger5Dot3.value = true;
+            break;
+        }
+      }
+    }
 
     const observer = new IntersectionObserver(function (entries) {
       if (entries[0].isIntersecting === true) {
@@ -168,23 +254,6 @@ const canvas5Rive = new rive.Rive({
     }, { threshold: 0.5 });
 
     observer.observe(canvas5);
-
-
-    // const trigger5Dot3Entry = inputs.find((i) => i.name === "5.3");
-
-    // prevNextBtns.forEach((btn) => {
-    //   btn.addEventListener("click", () => {
-        
-    //     switch(currentAnchor) {
-    //       case "anchor-timespan":
-    //         trigger5Dot3Entry.value = false;
-    //         break;
-    //       case "anchor-timespan-1":
-    //         trigger5Dot3Entry.value = true;
-    //         break;
-    //     }
-    //   })
-    // })
   },
 });
 

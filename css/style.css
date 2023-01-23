@@ -63,7 +63,7 @@ main {
 	max-width: 75rem;
 	margin: auto;
 	height: 100vh;
-	overflow: hidden;
+	overflow-y: hidden;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -169,6 +169,11 @@ main {
 
 .overviewNavOpen {
 	transform: translateX(0%) !important;
+}
+
+.overview > nav a {
+	color: var(--primary);
+	text-decoration: none;
 }
 
 .overview > nav > ul {
@@ -287,16 +292,77 @@ main > article::-webkit-scrollbar {
 	display: none;
 }
 
-/* main > article:first-of-type {
-	margin-top: 4rem;
-} */
-
 main > article > .text > p:not(:last-of-type) {
 	margin-bottom: 2rem;
 }
 
 .text {
 	height: min-content;
+}
+
+
+/* ----------------------------- text animations ---------------------------- */
+
+.anim-invis {
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.anim-visible {
+	opacity: 1;
+	transition: opacity 1s;
+}
+
+.anim-scale-down {
+	opacity: 1;
+	transform: scale(1.2);
+	transition: opacity 1s;
+	transform-origin: left center;
+	animation: scale-down 1s forwards;
+}
+
+@keyframes scale-down {
+	to {
+		transform: scale(1);
+	}
+}
+
+.anim-scale-up {
+	transition: opacity 1s;
+	opacity: 1;
+	transform: scale(1);
+	transform-origin: left center;
+	position: relative;
+	font-weight: bold;
+	animation: anim-scale-up 1s forwards ease-in-out;
+}
+
+.anim-scale-up::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 4rem;
+	top: -4rem;
+	left: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.anim-scale-up::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 4rem;
+	bottom: -4rem;
+	left: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+
+
+
+@keyframes anim-scale-up {
+	to {
+		transform: scale(1.2);
+	}
 }
 
 /* -------------------------------- 0 (header) ------------------------------ */
@@ -344,7 +410,23 @@ main > article > .text > p:not(:last-of-type) {
 	grid-column: 1 / span 12;
 }
 
+/* ----------------------------------- 0.5 ---------------------------------- */
+
+._0-5 {
+	justify-items: center;
+	align-content: center;
+	text-align: center;
+}
+
+._0-5 > .text {
+	grid-column: 1 / span 12;
+}
+
 /* ------------------------------------ 1 ----------------------------------- */
+
+._1 {
+	background: url(../images/bg-stars.svg);
+}
 
 ._1 > .text {
 	grid-column: 1 / span 12;
@@ -377,7 +459,7 @@ main > article > .text > p:not(:last-of-type) {
 
 /* ------------------------------- 2, 3 and 4 ------------------------------- */
 
-._2-3-4::after {
+._3::after {
 	content: '';
 	position: fixed;
 	width: 100%;
@@ -386,15 +468,33 @@ main > article > .text > p:not(:last-of-type) {
 	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 }
 
-._2-3-4 > .text {
+._3 > .text {
 	grid-column: 1 / span 5;
+	scroll-margin-top: 5rem;
 }
 
-._2-3-4 > .text > p:first-of-type {
-	margin-bottom: 12.5rem;
+._3 p {
+	scroll-margin-top: 5rem;
 }
 
-._2-3-4 > .animContainer {
+._3 > .text > div:nth-of-type(1) {
+	margin-bottom: 2rem;
+}
+
+._3 > .text > div:nth-of-type(2) {
+	margin-top: 2rem;
+	margin-bottom: 10rem;
+}
+
+._3 > .text > div > p:not(:last-of-type) {
+	margin-bottom: 2rem;
+}
+
+._3 > .text > p:first-of-type {
+	margin-bottom: 10rem;
+}
+
+._3 > .animContainer {
 	grid-column: 7 / span 6;
 	position: sticky;
 	height: min-content;
