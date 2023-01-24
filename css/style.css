@@ -116,6 +116,12 @@ main {
 	background: url(../images/arrow.svg) no-repeat;
 	background-size: contain;
 	border: none;
+	scale: 1;
+	transition: .2s scale;
+}
+
+.nav-previous:hover, .nav-next:hover {
+	scale: 1.2;
 }
 
 .nav-next {
@@ -396,6 +402,12 @@ main > article > .text > p:not(:last-of-type) {
 	color: var(--primary);
 	font-weight: bold;
 	font-family: 'Prompt', sans-serif;
+	scale: 1;
+	transition: .5s scale;
+}
+
+._0 > a:hover {
+	scale: 1.1;
 }
 
 ._0 > a > p {
@@ -410,7 +422,6 @@ main > article > .text > p:not(:last-of-type) {
 	rotate: 45deg;
 	display: block;
 	margin: auto;
-
 }
 
 ._0 > div, ._0 > a {
