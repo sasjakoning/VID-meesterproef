@@ -1,0 +1,1038 @@
+
+:root {
+	--background: hsl(0, 0%, 0%);
+	--primary: hsl(0, 0%, 100%);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+html, * {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+
+	scroll-behavior: smooth;
+	/* scroll-padding-top: 4rem; */
+
+	/* border: 1px solid yellow; */
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                Generic code                                */
+/* -------------------------------------------------------------------------- */
+
+body {
+	background-color: var(--background);
+	/* background-image: url(../images/bg-stars.svg); */
+	background-size: 20%;
+	background-attachment: fixed;
+	color: white;
+	font-family: 'Source Serif Pro', serif;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Prompt', sans-serif;
+	font-weight: 400;
+}
+
+h1 {
+	font-size: 2.625rem;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+h4, h5 {
+	font-size: 1.125rem;
+}
+
+h5 {
+	font-family: 'Source Serif Pro', serif;
+}
+
+p, li {
+	line-height: 1.9;
+}
+
+main {
+	max-width: 75rem;
+	margin: auto;
+	height: 100vh;
+	overflow-y: hidden;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                  Aside nav                                 */
+/* -------------------------------------------------------------------------- */
+
+.overview {
+	height: 100vh;
+	display: flex;
+	position: fixed;
+	top: 0;
+	left: 0;
+	align-items: center;
+	overflow-y: hidden;
+
+	z-index: 100;
+}
+
+.overview > div {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 10rem;
+	left: 1rem;
+	top: 50%;
+	transform: translate(-50%, 0);
+
+	rotate: -90deg;
+	transform-origin: 0 0;
+}
+
+.overview > a {
+	position: absolute;
+	text-decoration: none;
+	color: var(--primary);
+	bottom: 1rem;
+	left: 1rem;
+
+	background-image: url(../images/home.svg);
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 2rem;
+	aspect-ratio: 1/1;
+}
+
+.nav-previous, .nav-next {
+	width: 1rem;
+	height: 1rem;
+	background: url(../images/arrow.svg) no-repeat;
+	background-size: contain;
+	border: none;
+	scale: 1;
+	transition: .2s scale;
+}
+
+.nav-previous:hover, .nav-next:hover {
+	scale: 1.2;
+}
+
+.nav-next {
+	rotate: -90deg;
+	position: absolute;
+	left: -5rem;
+}
+
+.nav-previous {
+	rotate: 90deg;
+	position: absolute;
+	right: -5rem;
+}
+
+.overviewOpen {
+	background-color: transparent;
+	border: none;
+	font-family: 'Source Serif Pro', serif;
+	font-size: 1rem;
+	color: var(--primary);
+}
+
+.overviewOpen > p::first-letter {
+	text-transform: uppercase;
+}
+
+.overviewOpen > span {
+	display: block;
+	transform: scale(1);
+	width: 100%;
+	height: 1px;
+	background-color: var(--primary);
+	transition: 100ms;
+}
+
+.overviewOpen:hover > span {
+	transform: scale(1.4);
+	transition: 100ms;
+}
+
+.overviewClose {
+	width: 1rem;
+	aspect-ratio: 1/1;
+	background: url(../images/chevron-left.svg) no-repeat;
+	background-size: contain;
+	background-color: transparent;
+	border: none;
+	position: absolute;
+	right: .5rem;
+	top: 50vh;
+	transform: translateY(-50%);
+}
+
+.overview > nav {
+	width: 20rem;
+	height: 100vh;
+	background: var(--background);
+	transform: translateX(-100%);
+	transition: 200ms;
+	border-right: 1px solid var(--primary);
+}
+
+.overviewNavOpen {
+	transform: translateX(0%) !important;
+}
+
+.overview > nav a {
+	color: var(--primary);
+	text-decoration: none;
+}
+
+.overview > nav > ul {
+	padding: 2rem 0 0 4rem;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow-y: scroll;
+}
+
+.overview > nav > ul::-webkit-scrollbar {
+	display: none;
+}
+
+.overview ul {
+	list-style: none;
+}
+
+.overview li {
+	padding: .2rem 0 .2rem 0;
+}
+
+.overview > nav > ul > li > ul {
+	padding-left: 1rem;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                   footer                                   */
+/* -------------------------------------------------------------------------- */
+
+footer {
+	width: 100%;
+	height: 10rem;
+	border-top: 2px solid var(--primary);
+	padding: 2rem;
+	display: flex;
+	justify-content: center;
+}
+
+footer > a {
+	color: var(--primary);
+	text-decoration: none;
+	font-size: 1.5rem;
+	font-family: 'Prompt', sans-serif;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                main content                                */
+/* -------------------------------------------------------------------------- */
+
+.text-active {
+	position: relative;
+}
+
+.text-active::before {
+	content: "";
+	position: absolute;
+	width: 0%;
+	height: .0rem;
+	background-color: var(--primary);
+	z-index: -1;
+	top: 1.2rem;
+
+	animation: text-active 1s forwards ease-in-out;
+}
+
+@keyframes text-active {
+	10%{
+		width: 0%;
+		height: .2rem;
+	}
+	to {
+		width: 100%;
+		height: .2rem;
+	}
+}
+
+.animContainer {
+	overflow: hidden;
+	object-fit: fill;
+	position: relative;
+	height: min-content;
+}
+
+.animContainer > canvas {
+	width: 100%;
+	/* position: absolute; */
+	/* z-index: -1; */
+}
+
+
+main > article {
+	width: 100%;
+	/* height: calc(100vh - 4rem); */
+	height: 100vh;
+	overflow-y: scroll;
+	-ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+	padding: 5rem 0;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+	position: relative;
+
+	/* border: 1px solid red; */
+}
+
+main > article::-webkit-scrollbar {
+	display: none;
+}
+
+main > article > .text > p:not(:last-of-type) {
+	margin-bottom: 2rem;
+}
+
+.text {
+	height: min-content;
+}
+
+
+/* ----------------------------- text animations ---------------------------- */
+
+.anim-invis {
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.anim-visible {
+	opacity: 1;
+	transition: opacity 1s;
+}
+
+.anim-scale-down {
+	opacity: 1;
+	transform: scale(1.2);
+	transition: opacity 1s;
+	transform-origin: left center;
+	animation: scale-down 1s forwards;
+}
+
+@keyframes scale-down {
+	to {
+		transform: scale(1);
+	}
+}
+
+.anim-scale-up {
+	transition: opacity 1s;
+	opacity: 1;
+	transform: scale(1);
+	transform-origin: left center;
+	position: relative;
+	font-weight: bold;
+	animation: anim-scale-up 1s forwards ease-in-out;
+}
+
+.anim-scale-up::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 4rem;
+	top: -4rem;
+	left: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+.anim-scale-up::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 4rem;
+	bottom: -4rem;
+	left: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+}
+
+
+
+@keyframes anim-scale-up {
+	to {
+		transform: scale(1.2);
+	}
+}
+
+/* -------------------------------- 0 (header) ------------------------------ */
+
+._0 {
+	justify-items: center;
+	align-content: center;
+	text-align: center;
+}
+
+._0 h1 {
+	font-size: 8rem;
+}
+
+._0 > div > p {
+	font-size: 1.5rem;
+	font-family: 'Prompt', sans-serif;
+}
+
+._0 > a {
+	margin-top: 12.5rem;
+	font-size: 1.125rem;
+	text-decoration: none;
+	color: var(--primary);
+	font-weight: bold;
+	font-family: 'Prompt', sans-serif;
+	scale: 1;
+	transition: .5s scale;
+}
+
+._0 > a:hover {
+	scale: 1.1;
+}
+
+._0 > a > p {
+	margin-bottom: .5rem;
+}
+
+._0 > a > span {
+	width: .8rem;
+	height: .8rem;
+	border-bottom: 2px solid var(--primary);
+	border-right: 2px solid var(--primary);
+	rotate: 45deg;
+	display: block;
+	margin: auto;
+}
+
+._0 > div, ._0 > a {
+	grid-column: 1 / span 12;
+}
+
+/* ----------------------------------- 0.5 ---------------------------------- */
+
+._0-5 {
+	justify-items: center;
+	align-content: center;
+	text-align: center;
+}
+
+._0-5 > .text {
+	grid-column: 1 / span 12;
+}
+
+/* ------------------------------------ 1 ----------------------------------- */
+
+._1 {
+	background: url(../images/bg-stars.svg);
+}
+
+._1 > .text {
+	grid-column: 1 / span 12;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 1.5rem;
+	row-gap: 4rem;
+}
+
+._1 > .text > p:nth-of-type(1) {
+	grid-column: 2 / span 10;
+	grid-row: 1;
+}
+
+._1 > .text > p:nth-of-type(2) {
+	grid-column: 8 / span 5;
+	grid-row: 2;
+}
+
+._1 > .text > div {
+	grid-column: 1 / span 4;
+	grid-row: 3;
+}
+
+._1 > .text > div > p {
+	margin-bottom: 1rem;
+}
+
+/* ------------------------------- 2, 3 and 4 ------------------------------- */
+
+/* ._3::after {
+	content: '';
+	position: fixed;
+	width: 100%;
+	height: 10%;
+	bottom: 0;
+	background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+} */
+
+._3 > .text {
+	grid-column: 1 / span 5;
+	scroll-margin-top: 5rem;
+}
+
+._3 p {
+	scroll-margin-top: 5rem;
+}
+
+._3 > .text > div:nth-of-type(1) {
+	margin-bottom: 2rem;
+}
+
+._3 > .text > div:nth-of-type(2) {
+	margin-top: 2rem;
+	margin-bottom: 10rem;
+}
+
+._3 > .text > div > p:not(:last-of-type) {
+	margin-bottom: 2rem;
+}
+
+._3 > .text > p:first-of-type {
+	margin-bottom: 10rem;
+}
+
+._3 > .animContainer {
+	grid-column: 7 / span 6;
+	position: sticky;
+	height: min-content;
+	top: 0;
+	z-index: -1;
+}
+
+/* ------------------------------------ 5 ----------------------------------- */
+
+._5 > .text {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._5 > .text > p:nth-of-type(1) {
+	grid-column: 1 / span 6;
+}
+
+._5 > .text > p:nth-of-type(2) {
+	grid-column: 7 / span 6;
+}
+
+._5 > .animContainer {
+	grid-column: 2 / span 10;
+	aspect-ratio: 16/9;
+	height: 90%;
+	margin: auto;
+}
+
+._5 > .animContainer > canvas {
+	width: clamp(10%, 120rem, 100%);
+	aspect-ratio: 16/9;
+}
+
+/* ------------------------------------ 6 ----------------------------------- */
+
+._6 {
+	grid-template-rows: repeat(5, 1fr);
+}
+
+._6 > .text:nth-of-type(1) {
+	grid-column: 1 / span 6;
+	grid-row: 1;
+}
+
+._6 > figure:nth-of-type(1) {
+	grid-column: 1 / span 6;
+	grid-row: 2;
+}
+
+._6 > figure:nth-of-type(2) {
+	grid-column: 7 / span 6;
+	grid-row: 3;
+}
+
+._6 > figure:nth-of-type(3) {
+	grid-column: 1 / span 6;
+	grid-row: 4;
+}
+
+._6 > div {
+	grid-column: 2 / span 10;
+	grid-row: 5;
+}
+
+._6 > div:last-of-type {
+	margin-bottom: 10rem;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: 2;
+	align-items: center;
+}
+
+._6 > div:last-of-type > .text:first-of-type {
+	grid-column: 1 / span 10;
+	grid-row: 1;
+}
+
+._6 > div:last-of-type > .text:last-of-type {
+	grid-column: 1 / span 4;
+	grid-row: 2;
+}
+
+
+._6 > div > .animContainer {
+	display: flex;
+	justify-content: center;
+	grid-column: 5 / span 6;
+	grid-row: 2;
+}
+
+._6 canvas {
+	width: clamp(10rem, 31.25rem, 100%);
+	aspect-ratio: 1/1;
+}
+
+/* ------------------------------------ 7 ----------------------------------- */
+
+._7 {
+	place-items: center;
+}
+
+._7 > h2 {
+	grid-column: 1 / span 12;
+}
+
+/* ------------------------------------ 8 ----------------------------------- */
+
+._8 > .text:nth-of-type(1) {
+	grid-column: 2 / span 10;
+	justify-self: center;
+	align-self: flex-end;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 4rem;
+}
+
+._8 > .text:nth-of-type(1) > h2 {
+	font-size: 4rem;
+}
+
+._8 > .text:nth-of-type(1) > p {
+	font-size: 1.5rem;
+	font-family: 'Prompt', sans-serif;
+}
+
+._8 > .text:nth-of-type(2) {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._8 > .text:nth-of-type(2) > p:nth-of-type(1) {
+	grid-column: 1 / span 6;
+}
+
+._8 > .text:nth-of-type(2) > p:nth-of-type(2) {
+	grid-column: 7 / span 6;
+}
+
+/* ------------------------------------ 9.1 ----------------------------------- */
+
+._9-1 > h3, ._15 > h3 {
+	grid-column: 1 / span 12;
+	justify-self: center;
+	align-self: end;
+	margin-bottom: 1rem;
+}
+
+._9-1 > div, ._15 > div {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._9-1 > div > .text, ._15 > div > .text {
+	background-color: var(--primary);
+	color: var(--background);
+	padding: 2rem;
+	aspect-ratio: 1/1;	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
+}
+
+._9-1 > div > .text:nth-of-type(1), ._15 > div > .text:nth-of-type(1) {
+	grid-column: 1 / span 6;
+}
+
+._9-1 > div > .text:nth-of-type(2), ._15 > div > .text:nth-of-type(2) {
+	grid-column: 7 / span 6;
+}
+
+/* ----------------------------------- 9.2 ---------------------------------- */
+
+._9-2 > .text:nth-of-type(1){
+	grid-column: 4 / span 6;
+	background-color: var(--primary);
+	color: var(--background);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
+}
+
+._9-2 > .text:nth-of-type(2) {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._9-2 > .text:nth-of-type(2) > p {
+	grid-column: 1 / span 6;
+}
+
+._9-2 > .text:nth-of-type(2) > div {
+	grid-column: 7 / span 6;
+}
+
+._9-2 > .text:nth-of-type(2) > div > p:nth-of-type(2) {
+	margin-top: 1rem;
+}
+
+._9-2 > .text:nth-of-type(2) > div > h3 {
+	margin-bottom: 1rem;
+}
+
+._9-2 > .animContainer {
+	grid-column: 2 / span 10;
+	height: auto;
+}
+
+._9-2 > .animContainer > canvas {
+	height: 100%;
+}
+
+/* ----------------------------------- 10 ----------------------------------- */
+
+._10 > .text {
+	grid-column: 2 / span 10;
+	text-align: center;
+	align-self: end;
+	margin-bottom: 4rem;
+}
+
+._10 > div {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1.5rem;
+}
+
+._10 > div > figure {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+._10 > div > figure > section {
+	background-color: var(--background);
+	border: 2px solid var(--primary);
+	width: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+._10 > div > figure:nth-of-type(1) {
+	grid-column: 1 / span 4;
+}
+
+._10 > div > figure:nth-of-type(2) {
+	grid-column: 5 / span 4;
+}
+
+._10 > div > figure:nth-of-type(3) {
+	grid-column: 9 / span 4;
+}
+
+
+/* ------------------------------ 11, 13 and 14 ----------------------------- */
+
+._11, ._13-1, ._14-1 {
+	align-items: center;
+}
+
+._11 > .animContainer, ._13-1 > .animContainer, ._14-1 > .animContainer {
+	grid-column: 1 / span 4;
+	background-color: var(--background);
+	border: 2px solid var(--primary);
+	width: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+}
+
+._11 > div, ._13-1 > div, ._14-1 > div {
+	height: min-content;
+	grid-column: 5 / span 8;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	gap: 1.5rem;
+}
+
+._11 > div > .text:nth-of-type(1), ._13-1 > div > .text:nth-of-type(1), ._14-1 > div > .text:nth-of-type(1) {
+	grid-column: 1 / span 8;
+}
+
+._11 > div > .text:nth-of-type(1) > h2, ._13-1 > div > .text:nth-of-type(1) > h2, ._14-1 > div > .text:nth-of-type(1) > h2 {
+	font-size: 3rem;
+}
+
+._11 > div > .text:nth-of-type(1) > p, ._13-1 > div > .text:nth-of-type(1) > p, ._14-1 > div > .text:nth-of-type(1) > p {
+	font-size: 1.5rem;
+	font-family: 'Prompt', sans-serif;
+}
+
+._11 > div > .text:nth-of-type(2), ._13-1 > div > .text:nth-of-type(2), ._14-1 > div > .text:nth-of-type(2) {
+	grid-column: 2 / span 7;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+/* ----------------------------------- 12 ----------------------------------- */
+
+._12 {
+	grid-template-rows: repeat(3, 1fr);
+	gap: 4rem;
+}
+
+._12 > figure:nth-of-type(1) {
+	grid-column: 1 / span 12;
+	grid-row: 1 / span 1;
+
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+._12 > figure > .text > h3 {
+	margin-bottom: 1.5rem;
+}
+
+._12 > figure:nth-of-type(1) > .text {
+	grid-column: 1 / span 4;
+}
+
+._12 > figure:nth-of-type(1) > .animContainer {
+	grid-column: 5 / span 8;
+}
+
+._12 > figure:nth-of-type(2) {
+	grid-column: 1 / span 12;
+	grid-row: 2 / span 1;
+
+	display: grid;
+	grid-template-columns: subgrid;
+}
+
+._12 > figure:nth-of-type(2) > .text {
+	grid-column: 9 / span 4;
+	grid-row: 1;
+}
+
+._12 > figure:nth-of-type(2) > .animContainer {
+	grid-column: 1 / span 8;
+}
+
+._12 > div {
+	grid-column: 1 / span 12;
+	grid-row: 3 / span 1;	
+
+	display: grid;
+	grid-template-columns: subgrid;
+	gap: 1.5rem;
+}
+
+._12 > div > .text {
+	grid-column: 1 / span 6;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+._12 > div > .animContainer {
+	grid-column: 7 / span 6;
+}
+
+/* ---------------------------------- 13.2 ---------------------------------- */
+
+._13-2 {
+	grid-template-rows: repeat(3, 1fr);
+}
+
+._13-2 > .animContainer {
+	grid-row: 1 / span 3;
+	grid-column: 2 / span 10;
+	height: 100%;
+	aspect-ratio: 1/1;
+	margin: auto;
+}
+
+._13-2 > .text {
+	grid-row: 1 / span 1;
+	grid-column: 6 / span 7;
+	display: flex;
+	flex-direction:15 column;
+	gap: 1rem;
+}
+
+
+/* ---------------------------------- 14.2 ---------------------------------- */
+
+._14-2 > figure {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: subgrid;
+	gap: 1.5rem;
+}
+
+._14-2 > figure > .animContainer {
+	grid-column: 1 / span 6;
+}
+
+._14-2 > figure > .text {
+	grid-column: 7 / span 6;
+}
+
+._14-2 > div {
+	margin-top: 4rem;
+	grid-column: 2 / span 10;
+}
+
+._14-2 > div > .text {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+._14-2 > div > .animContainer {
+	width: 60%;
+	margin: auto;
+}
+
+/* ---------------------------------- 14.3 ---------------------------------- */
+
+._14-3 {
+	background: url(../images/bg-stars.svg);
+}
+
+/* --------------------------------- 15-sub --------------------------------- */
+
+._15-sub {
+	row-gap: 4rem;
+}
+
+._15-sub > .text:nth-of-type(1){
+	grid-column: 4 / span 6;
+	background-color: var(--primary);
+	color: var(--background);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	gap: 1rem;
+}
+
+._15-sub > .text:nth-of-type(2) {
+	grid-column: 2 / span 10;
+	margin-bottom: 8rem;
+}
+
+._15-sub > figure {
+	grid-column: 1 / span 12;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: 1, 1fr;
+	gap: 1.5rem;
+	align-items:center;
+	position: relative;
+	scroll-margin-top: 2rem;
+}
+
+._15-sub > figure:nth-of-type(odd) > .text {
+	grid-column: 1 / span 7;
+	grid-row: 1;
+}
+
+._15-sub > figure:nth-of-type(odd) > .animContainer {
+	grid-column: 8 / span 5;
+	grid-row: 1;
+}
+
+._15-sub > figure:nth-of-type(even) > .text {
+	grid-column: 6 / span 7;
+	grid-row: 1;
+}
+
+._15-sub > figure:nth-of-type(even) > .animContainer {
+	grid-column: 1 / span 5;
+	grid-row: 1;
+}
+
+._15-sub > figure > p {
+	position: absolute;
+	left: -2rem;
+}
+
+/* ----------------------------------- 16 ----------------------------------- */
+
+._16 {
+	place-items: center;
+}
+
+._16 > .text:nth-of-type(1) {
+	grid-column: 1 / span 6;
+}
+
+._16 > .text:nth-of-type(2) {
+	grid-column: 7 / span 6;
+}
+
+
+/* -------------------------------------------------------------------------- */
+/*                                media queries                               */
+/* -------------------------------------------------------------------------- */
+
+@media only screen and (max-width: 600px) {
+	main > article {
+		display: flex;
+		flex-direction: column;
+	}
+  }
